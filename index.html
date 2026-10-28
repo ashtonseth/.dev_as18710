@@ -1,0 +1,1188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="AS18710 · ashtonseth. A network for connectivity, learning, and experimentation. Network information and an illustrative IPv6 address explorer.">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F4F8FF">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B1422">
+  <link rel="canonical" href="https://as18710.ashtonseth.dev/">
+  <title>AS18710 · ashtonseth</title>
+  <link rel="icon" type="image/svg+xml" sizes="any" href="favicon.svg">
+  <script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
+  <style>
+/* ashtonseth design tokens v1.2.0, do not edit per-site; see DESIGN-STANDARD.md */
+:root {
+  color-scheme: light dark;
+
+  /* Light (default) */
+  --bg: #F4F8FF;
+  --surface: #FBFDFF;
+  --surface-2: #EAF2FF;
+  --border: #CBDCF2;
+  --text: #102A43;
+  --text-muted: #4C6580;
+  --brand: #1F5FD6;
+  --brand-hover: #174BAD;
+  --on-brand: #FBFDFF;
+  --secondary: #40658A;
+  --secondary-hover: #31516F;
+  --on-secondary: #FBFDFF;
+  --secondary-soft: #E8F0F8;
+  --tertiary: #173B63;
+  --tertiary-hover: #102C4B;
+  --on-tertiary: #FBFDFF;
+  --tertiary-soft: #E2EBF5;
+  --accent: #0067A3;
+  --accent-hover: #005282;
+  --on-accent: #FBFDFF;
+  --accent-soft: #E0F2FF;
+  --accent-secondary: #D7E7FF;
+  --accent-secondary-hover: #C1DBFF;
+  --on-accent-secondary: #173B63;
+  --success: var(--secondary);
+  --warning: #8A5A00;
+  --warning-hover: #704900;
+  --on-warning: #FFFBF0;
+  --warning-soft: #FFF2CC;
+  --danger: #C42B2B;
+  --danger-hover: #A62222;
+  --on-danger: #FFF7F7;
+  --danger-soft: #FDE8E8;
+  --shadow: 0 1px 2px rgb(16 42 67 / 0.06), 0 4px 12px rgb(16 42 67 / 0.06);
+}
+
+/* Dark by system preference, unless the user forced light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1422;
+    --surface: #111F33;
+    --surface-2: #192B44;
+    --border: #304A6A;
+    --text: #E1EDFF;
+    --text-muted: #9EB6D3;
+    --brand: #6EA2FF;
+    --brand-hover: #8DB7FF;
+    --on-brand: #0B1422;
+    --secondary: #93B4D6;
+    --secondary-hover: #B2CBE5;
+    --on-secondary: #0B1422;
+    --secondary-soft: #1B304A;
+    --tertiary: #AEC4DF;
+    --tertiary-hover: #CBDAEE;
+    --on-tertiary: #0B1422;
+    --tertiary-soft: #203650;
+    --accent: #63C7FF;
+    --accent-hover: #94DAFF;
+    --on-accent: #0B1422;
+    --accent-soft: #10324B;
+    --accent-secondary: #233F66;
+    --accent-secondary-hover: #2B4F7C;
+    --on-accent-secondary: #D7E7FF;
+    --success: var(--secondary);
+    --warning: #F0B24A;
+    --warning-hover: #FFD06A;
+    --on-warning: #241A00;
+    --warning-soft: #382B12;
+    --danger: #FF7B7B;
+    --danger-hover: #FF9B9B;
+    --on-danger: #2C0B0E;
+    --danger-soft: #3A1B22;
+    --shadow: 0 0 0 1px rgb(174 196 223 / 0.08);
+  }
+}
+
+/* Dark forced by the user */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0B1422;
+  --surface: #111F33;
+  --surface-2: #192B44;
+  --border: #304A6A;
+  --text: #E1EDFF;
+  --text-muted: #9EB6D3;
+  --brand: #6EA2FF;
+  --brand-hover: #8DB7FF;
+  --on-brand: #0B1422;
+  --secondary: #93B4D6;
+  --secondary-hover: #B2CBE5;
+  --on-secondary: #0B1422;
+  --secondary-soft: #1B304A;
+  --tertiary: #AEC4DF;
+  --tertiary-hover: #CBDAEE;
+  --on-tertiary: #0B1422;
+  --tertiary-soft: #203650;
+  --accent: #63C7FF;
+  --accent-hover: #94DAFF;
+  --on-accent: #0B1422;
+  --accent-soft: #10324B;
+  --accent-secondary: #233F66;
+  --accent-secondary-hover: #2B4F7C;
+  --on-accent-secondary: #D7E7FF;
+  --success: var(--secondary);
+  --warning: #F0B24A;
+  --warning-hover: #FFD06A;
+  --on-warning: #241A00;
+  --warning-soft: #382B12;
+  --danger: #FF7B7B;
+  --danger-hover: #FF9B9B;
+  --on-danger: #2C0B0E;
+  --danger-soft: #3A1B22;
+  --shadow: 0 0 0 1px rgb(174 196 223 / 0.08);
+}
+
+:root[data-theme="light"] { color-scheme: light; }
+
+</style>
+  <style>
+/* Shared typography/spacing verified against DESIGN-STANDARD.md 2.10.0; palette remains in tokens.css. */
+:root {
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Fluid scale: min at ~360px viewport, max at ~1280px */
+  --step--1: clamp(0.83rem, 0.80rem + 0.15vw, 0.90rem);
+  --step-0:  clamp(1.00rem, 0.96rem + 0.20vw, 1.10rem);
+  --step-1:  clamp(1.20rem, 1.10rem + 0.45vw, 1.45rem);
+  --step-2:  clamp(1.45rem, 1.25rem + 0.90vw, 1.95rem);
+  --step-3:  clamp(1.80rem, 1.45rem + 1.60vw, 2.80rem);
+
+  --space-1: 0.25rem;  /*  4 */
+  --space-2: 0.5rem;   /*  8 */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-6: 1.5rem;   /* 24 */
+  --space-8: 2rem;     /* 32 */
+  --space-12: 3rem;    /* 48 */
+  --space-16: 4rem;    /* 64 */
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+
+</style>
+  <style>
+* { box-sizing: border-box; }
+body { margin: 0; font: var(--step-0)/1.6 var(--font-sans); background: var(--bg); color: var(--text); padding-inline: env(safe-area-inset-left) env(safe-area-inset-right); padding-bottom: env(safe-area-inset-bottom); }
+[hidden] { display: none !important; }
+a { color: var(--brand); text-underline-offset: 4px; }
+a:hover { color: var(--brand-hover); }
+:is(h1, h2, h3, h4, h5, h6) a, .page-title-link { color: inherit; text-decoration: none; }
+:is(h1, h2, h3, h4, h5, h6) a:hover, .page-title-link:hover { color: var(--brand); text-decoration: underline; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+code { font-family: var(--font-mono); }
+h1, h2, h3, p, dl { margin: 0; }
+h1 { font-size: var(--step-3); line-height: 1.15; letter-spacing: -.04em; }
+h2 { font-size: var(--step-2); line-height: 1.2; letter-spacing: -.025em; }
+h2 span { margin-right: var(--space-2); font-size: .8em; }
+h3 { font-size: var(--step-1); line-height: 1.3; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--brand); color: var(--on-brand); }
+.container { width: min(100% - 2 * var(--space-4), 72rem); margin-inline: auto; }
+/* Consumer emphasis; keep the synchronized shared header stylesheet intact. */
+.domain-header .domain-header__brand { font-weight: 700; }
+.skip-link { position: absolute; z-index: 5; top: var(--space-2); left: var(--space-4); padding: var(--space-3) var(--space-4); background: var(--surface); transform: translateY(-200%); }
+.skip-link:focus { transform: translateY(0); }
+main { padding-bottom: var(--space-4); }
+.overview { display: grid; gap: var(--space-6); padding-block: var(--space-6); }
+.overview .intro { align-self: center; }
+.eyebrow { font-size: var(--step--1); font-weight: 600; color: var(--text-muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: var(--space-2); }
+.heading-dot { color: var(--brand); }
+.purpose { margin-top: var(--space-2); max-width: 40ch; font-size: var(--step-1); line-height: 1.5; color: var(--text-muted); }
+.network-facts { display: grid; gap: var(--space-2); align-content: center; }
+.network-facts > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr); align-items: center; gap: var(--space-4); padding-bottom: var(--space-1); border-bottom: 1px solid var(--border); }
+dt, .field-label { font-size: var(--step--1); color: var(--text-muted); }
+dd { margin: 0; overflow-wrap: anywhere; }
+.network-facts dd { font-size: 1rem; font-weight: 550; }
+.network-facts dd a { display: inline-flex; align-items: center; min-height: 44px; }
+.network-facts > div:last-child dt { align-self: center; }
+.prefix-action { display: inline-block; max-width: 100%; min-width: 0; min-height: 44px; padding: 0; border: 0; border-radius: var(--radius-sm); background: transparent; color: inherit; font: inherit; font-family: var(--font-mono); text-align: start; overflow-wrap: anywhere; white-space: normal; cursor: copy; }
+.prefix-action:hover { background: var(--surface-2); color: var(--brand); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-4); box-shadow: var(--shadow); }
+.site-footer { padding-block: var(--space-4) var(--space-6); }
+.network-details { display: grid; gap: var(--space-4); margin-top: var(--space-4); }
+.detail-card { min-width: 0; }
+.detail-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); min-height: 44px; margin-bottom: var(--space-2); }
+.detail-heading h2 { font-size: var(--step-1); }
+.standard-reference { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--step--1); }
+.detail-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: var(--step--1); }
+.detail-table caption { text-align: start; font-weight: 600; padding-bottom: var(--space-2); }
+.detail-table th, .detail-table td { text-align: start; vertical-align: top; padding-block: var(--space-2); padding-inline-end: var(--space-3); overflow-wrap: anywhere; }
+.detail-table :is(th, td):last-child { padding-inline-end: 0; }
+.detail-table thead th { color: var(--text-muted); font-weight: 500; border-bottom: 1px solid var(--border); }
+.detail-table tbody th { font-weight: 600; }
+.community-table th:first-child { width: 38%; }
+.upstream-table th:nth-child(1) { width: 28%; }
+.upstream-table th:nth-child(2) { width: 32%; }
+.upstream-table tbody th, .upstream-table code { white-space: nowrap; }
+@media (min-width: 48rem) { .network-details { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+.section-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); }
+/* Compact prefix-first explorer, adapted from the supplied reference. */
+.explorer-card .section-heading h2 { font-size: var(--step-1); }
+.caption { color: var(--text-muted); font-size: var(--step--1); }
+.fallback { padding: var(--space-4); margin-top: var(--space-4); background: var(--surface-2); border-radius: var(--radius-sm); }
+.fallback p { margin-top: var(--space-3); }
+.fallback code { overflow-wrap: anywhere; }
+@media (min-width: 48rem) {
+  .overview { grid-template-columns: 1.1fr 1fr; gap: var(--space-8); padding-block: var(--space-6); }
+  .card { padding: var(--space-6); }
+  :root[data-spacing="compact"] .overview { padding-block: var(--space-4); }
+  :root[data-spacing="compact"] main { padding-bottom: var(--space-2); }
+  :root[data-spacing="balanced"] .network-facts > div,
+  :root[data-spacing="comfortable"] .network-facts > div { padding-bottom: var(--space-2); }
+  :root[data-spacing="comfortable"] .overview { padding-block: var(--space-8); }
+  :root[data-spacing="comfortable"] .network-facts { gap: var(--space-3); }
+  :root[data-spacing="comfortable"] .card { padding: var(--space-8); }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; } }
+@media (prefers-contrast: more) { .caption, dt, .field-label, .eyebrow, .purpose { color: var(--text); } .card { border-width: 2px; } }
+@media (forced-colors: active) { a { text-decoration: underline; } :focus-visible { outline: 3px solid Highlight; } }
+
+</style>
+  <style>
+/* Shared ashtonseth.dev sticky utility header; manifest contract v1.0.0, Design Standard 2.10.0. */
+html {
+  --domain-header-height: calc(12rem + env(safe-area-inset-top));
+  scroll-padding-block-start: calc(var(--domain-header-height) + 12px);
+}
+/* Keep the first keyboard destination visible above the sticky component. */
+.skip-link { position: fixed; z-index: 20; }
+.domain-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+.domain-header .domain-header__inner {
+  box-sizing: border-box;
+  inline-size: min(calc(100% - 2 * var(--space-4)), 72rem);
+  max-inline-size: 72rem;
+  min-inline-size: 0;
+  margin-inline: auto;
+}
+.domain-header__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "brand theme" "nav nav";
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding-block: max(var(--space-1), env(safe-area-inset-top)) var(--space-1);
+  font-size: var(--step--1);
+}
+.domain-header__brand {
+  grid-area: brand;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  min-width: 0;
+  min-height: 32px;
+  color: var(--text);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.domain-header__brand:hover { color: var(--brand); }
+.domain-header__nav { grid-area: nav; min-width: 0; }
+.domain-header__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.domain-header__item { min-width: 0; max-width: 100%; }
+.domain-header__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  max-width: 100%;
+  padding: var(--space-1) var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  background: transparent;
+  box-shadow: none;
+  font: 500 var(--step--1)/1.4 var(--font-sans);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.domain-header__link:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+.domain-header__link[aria-current="location"] { background: var(--surface-2); }
+.domain-header__link[aria-current="location"] {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+.domain-header__brand[aria-current="location"] { font-weight: 700; }
+.domain-header__theme { grid-area: theme; display: flex; justify-content: flex-end; }
+.domain-header__theme > button {
+  position: static;
+  inset: auto;
+  margin: 0;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+.domain-header__theme > button:hover {
+  background: var(--surface-2);
+}
+.domain-header__theme > button > svg { display: block; flex: none; width: 20px; height: 20px; }
+.domain-header__theme > button:focus-visible { border-radius: 2px; }
+.domain-header a:focus-visible, .domain-header button:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 1px;
+}
+@media (min-width: 48rem) {
+  html { --domain-header-height: calc(6rem + env(safe-area-inset-top)); }
+  .domain-header__inner {
+    grid-template-columns: max-content minmax(0, 1fr) auto;
+    grid-template-areas: "brand nav theme";
+  }
+  .domain-header__list { justify-content: flex-end; }
+}
+@media (prefers-contrast: more) {
+  .domain-header { border-bottom-width: 2px; }
+}
+@media (forced-colors: active) {
+  .domain-header { border-color: CanvasText; }
+  .domain-header__theme > button { color: ButtonText; }
+  .domain-header a:focus-visible, .domain-header button:focus-visible { outline-color: Highlight; }
+}
+
+</style>
+  
+  
+  
+  
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+<!-- Shared domain header: start -->
+<header class="domain-header">
+  <div class="domain-header__inner">
+    <a id="domain-nav-home" class="domain-header__brand" href="https://ashtonseth.dev/" title="ashtonseth.dev">ashtonseth.dev</a>
+    <nav class="domain-header__nav" aria-label="ashtonseth.dev sites">
+      <ul class="domain-header__list">
+        <li class="domain-header__item"><a id="domain-nav-docs" class="domain-header__link" href="https://docs.ashtonseth.dev/" title="docs.ashtonseth.dev">Docs</a></li>
+        <li class="domain-header__item"><a id="domain-nav-as18710" class="domain-header__link" href="https://as18710.ashtonseth.dev/" title="as18710.ashtonseth.dev" aria-current="location">AS18710</a></li>
+      </ul>
+    </nav>
+    <div class="domain-header__theme"><button class="theme-toggle" id="theme-toggle" type="button" hidden aria-label="Switch to dark theme"><svg id="theme-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"></svg></button></div>
+  </div>
+</header>
+<!-- Shared domain header: end -->
+  <main id="main" class="container" tabindex="-1">
+    <section id="overview" class="overview" aria-labelledby="page-title">
+      <div class="intro">
+        <p class="eyebrow">ASHTONSETH</p>
+        <h1 id="page-title">AS18710<span class="heading-dot" aria-hidden="true">.</span></h1>
+        <p class="purpose">A network for connectivity, learning, and experimentation.</p>
+      </div>
+      <dl class="network-facts"><div><dt>Peering policy</dt><dd>Selective</dd></div><div><dt>IPv4 prefixes</dt><dd><code data-copy-prefix="23.160.52.0/24">23.160.52.0/24</code></dd></div><div><dt>IPv6 prefixes</dt><dd><code data-base-prefix data-copy-prefix="2620:e0:6000::/48">2620:e0:6000::/48</code></dd></div><div><dt>Network contact</dt><dd><a href="mailto:noc@ashtonseth.com">noc@ashtonseth.com</a></dd></div></dl>
+    </section>
+
+    <section id="address-space" class="card explorer-card" aria-labelledby="address-title">
+      <div class="section-heading"><h2 id="address-title"><span aria-hidden="true">🧭</span> IPv6 explorer</h2><nav class="breadcrumbs" id="breadcrumbs" aria-label="Address hierarchy"></nav></div>
+      <div id="explorer-fallback" class="fallback">
+        <h3>The address plan at a glance</h3>
+        <p>The model divides a /48 into environment /50, geography /52, region /54, site /56 and function /64 containers. Geography and function names are illustrative.</p>
+        <p>Example path: Production → North America → Northeast → Site 1 → NET-INFRA: <code data-fallback-prefix>2620:e0:6000:100::/64</code>.</p>
+        <p class="caption">Enable JavaScript to explore and copy prefixes.</p>
+      </div>
+      <div id="explorer-app" hidden>
+        <div class="scope-row"><button id="back-prefix" class="button secondary" type="button" hidden>← Back</button><div class="scope-title"><h3><button id="scope-prefix" class="prefix-action" type="button" title="Copy prefix">2620:e0:6000::/48</button></h3><p id="scope-name" class="caption" hidden></p></div></div>
+        <div id="manual-copy" class="manual-copy" hidden><label for="manual-prefix">Select and copy manually</label><input id="manual-prefix" class="manual-prefix" type="text" readonly spellcheck="false"></div>
+        <div class="explorer-layout">
+          <div class="browser-panel">
+            <div class="browser-heading"><h3 id="level-heading">Choose an environment</h3><span id="level-count" class="caption"></span></div>
+            <p class="caption" id="level-help">Select a block to explore its address space.</p>
+            <div id="address-blocks" class="address-blocks"></div>
+            <div id="example-assignment" class="example-assignment" hidden><p class="field-label">Example assignment</p><button type="button" id="example-prefix" class="prefix-action" title="Copy example"></button></div>
+          </div>
+          <aside class="decoder-panel" aria-labelledby="decoder-title">
+            <div class="decoder-heading"><h3 id="decoder-title">Bit field decoder</h3><span id="decoder-state" class="caption">Selected</span></div>
+            <div id="bit-fields" class="bit-fields"></div>
+            <h4 id="selection-title">Address plan</h4>
+            <button type="button" id="decoder-prefix" class="decoder-prefix prefix-action" title="Copy prefix">2620:e0:6000::/48</button>
+            <p id="selection-description" class="caption"></p>
+            <dl id="selection-meta" class="selection-meta"></dl>
+          </aside>
+        </div>
+        <div class="tool-disclosures">
+        <details id="function-shortcuts" class="shortcuts"><summary>Function shortcuts <span class="caption">· 25 named</span></summary><p class="caption">Shortcuts open a function in the selected site. Before a site is selected, they use Production / North America / Northeast / Site 1.</p><div id="shortcut-list" class="shortcut-list"></div></details>
+        </div>
+        <p class="caption model-notice">Illustrative taxonomy and example assignments; no live allocation or routing observation is implied.</p>
+      </div>
+    </section>
+
+    <div class="network-details">
+      <section class="card detail-card" aria-labelledby="communities-title">
+        <div class="detail-heading"><h2 id="communities-title"><span aria-hidden="true">🏷️</span> BGP communities</h2><a class="standard-reference" href="https://www.rfc-editor.org/rfc/rfc8092.html">RFC 8092</a></div>
+        <table class="detail-table community-table">
+          <caption>Source Type - <code>18710:1:*</code></caption>
+          <thead><tr><th scope="col">Community</th><th scope="col">Description</th></tr></thead>
+          <tbody><tr><th scope="row"><code>18710:1:0</code></th><td>Routes local to AS18710</td></tr></tbody>
+        </table>
+      </section>
+      <section class="card detail-card" aria-labelledby="upstreams-title">
+        <div class="detail-heading"><h2 id="upstreams-title"><span aria-hidden="true">🔗</span> Upstream providers</h2></div>
+        <table class="detail-table upstream-table" aria-labelledby="upstreams-title">
+          <thead><tr><th scope="col">Provider</th><th scope="col">ASN</th><th scope="col">PoP</th></tr></thead>
+          <tbody><tr><th scope="row">Route64</th><td><code>AS212895</code></td><td>FRM - Fremont, CA</td></tr></tbody>
+        </table>
+      </section>
+    </div>
+
+  </main>
+  <footer class="container site-footer"><p class="caption">AS18710 · ashtonseth</p></footer>
+  <div class="banner-stack"><div id="banner-status" class="banner-region" role="status" aria-atomic="false" aria-relevant="additions"></div><div id="banner-alert" class="banner-region" role="alert" aria-atomic="false" aria-relevant="additions"></div></div>
+<script>
+(() => {
+  const root = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  const icon = document.getElementById('theme-icon');
+  const system = matchMedia('(prefers-color-scheme: dark)');
+  const resolve = () => root.dataset.theme || (system.matches ? 'dark' : 'light');
+  function sync() {
+    const dark = resolve() === 'dark';
+    root.style.colorScheme = dark ? 'dark' : 'light';
+    toggle.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
+    toggle.title = toggle.getAttribute('aria-label');
+    icon.innerHTML = dark
+      ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/>'
+      : '<path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/>';
+    const chrome = document.querySelector('meta[name="theme-color"]');
+    chrome.removeAttribute('media');
+    chrome.content = getComputedStyle(root).getPropertyValue('--bg').trim();
+  }
+  toggle.addEventListener('click', () => {
+    root.dataset.theme = resolve() === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch (_) { /* The in-memory choice still works. */ }
+    sync();
+  });
+  system.addEventListener('change', sync);
+  sync();
+  toggle.hidden = false;
+})();
+
+/* Shared sticky-header clearance; static links and CSS remain usable without JS. */
+(() => {
+  const root = document.documentElement;
+  const header = document.querySelector('.domain-header');
+  if (!header) return;
+  let height = -1;
+  let scheduled = false;
+  let checkFragment = false;
+  let checkFocus = false;
+
+  function measure() {
+    const next = Math.ceil(header.getBoundingClientRect().height);
+    if (next !== height) {
+      height = next;
+      root.style.setProperty('--domain-header-height', `${height}px`);
+    }
+  }
+
+  function fragmentTarget() {
+    if (!window.location.hash) return null;
+    let id = window.location.hash.slice(1);
+    try { id = decodeURIComponent(id); } catch (_) { /* Retain an undecodable ID. */ }
+    return document.getElementById(id);
+  }
+
+  function reveal(target, explicit) {
+    if (!target || target === root || target === document.body ||
+        !target.getBoundingClientRect || header.contains(target) ||
+        target.closest('.skip-link')) return;
+    const rect = target.getBoundingClientRect();
+    const clearance = Math.max(0, header.getBoundingClientRect().bottom) + 12;
+    // A size change may protect an intersecting control; it must not restore an
+    // old skip target or pull an offscreen former focus back after manual scroll.
+    if (!explicit && (!(target.tabIndex >= 0 || target.isContentEditable) ||
+        rect.bottom <= 0 || rect.top >= window.innerHeight ||
+        rect.height > Math.max(0, window.innerHeight - clearance))) return;
+    if (rect.top < clearance) {
+      window.scrollBy({ top: rect.top - clearance, left: 0, behavior: 'instant' });
+    }
+  }
+
+  function schedule(fragment = false, focus = false) {
+    checkFragment = checkFragment || fragment;
+    checkFocus = checkFocus || focus;
+    if (scheduled) return;
+    scheduled = true;
+    window.requestAnimationFrame(() => {
+      scheduled = false;
+      measure();
+      const target = checkFragment ? fragmentTarget() : document.activeElement;
+      const explicit = checkFragment || checkFocus;
+      checkFragment = false;
+      checkFocus = false;
+      reveal(target, explicit);
+    });
+  }
+
+  measure();
+  if ('ResizeObserver' in window) new window.ResizeObserver(() => schedule()).observe(header);
+  window.addEventListener('resize', () => schedule(), { passive: true });
+  document.addEventListener('focusin', () => schedule(false, true));
+  window.addEventListener('hashchange', () => schedule(true));
+  window.addEventListener('load', () => schedule(true), { once: true });
+  schedule(true);
+})();
+
+(() => {
+/* Local outcome banners: Design Standard 2.9.2 §6.7; no external dependencies. */
+const copyNotifications = (() => {
+  const stack = document.querySelector('.banner-stack');
+  const records = [], waiting = [];
+  const variants = {
+    info: ['ℹ', 'Info', 6000], success: ['✔', 'Success', 6000],
+    warning: ['▲', 'Warning', 10000], danger: ['✖', 'Error', 0],
+  };
+  const originalPadding = document.documentElement.style.scrollPaddingBottom;
+  let layoutFrame = 0;
+
+  function make(tag, className, text) {
+    const node = document.createElement(tag);
+    node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+  function layout() {
+    layoutFrame = 0;
+    if (!stack) return;
+    const bottom = parseFloat(getComputedStyle(stack).bottom) || 0;
+    document.documentElement.style.scrollPaddingBottom = records.length
+      ? `${Math.ceil(stack.offsetHeight + bottom)}px` : originalPadding;
+    const focused = document.activeElement;
+    document.documentElement.style.setProperty('--banner-scroll-room', records.length
+      ? `${Math.ceil(stack.offsetHeight + bottom)}px` : '0px');
+    if (!records.length || !focused) return;
+    if (stack.contains(focused)) {
+      focused.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
+      return;
+    }
+    const target = focused.getBoundingClientRect();
+    const overlay = stack.getBoundingClientRect();
+    if (target.width && target.height && target.bottom > overlay.top
+        && target.top < overlay.bottom && target.right > overlay.left && target.left < overlay.right) {
+      // A stack can exceed half a short viewport; centering may leave the
+      // focused control covered. Physical end room also lets last-page links
+      // scroll above the overlay without moving existing content positions.
+      focused.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'instant' });
+    }
+  }
+  function scheduleLayout() {
+    if (!layoutFrame) layoutFrame = requestAnimationFrame(layout);
+  }
+  function pauseTimer(record) {
+    if (!record.timer) return;
+    clearTimeout(record.timer);
+    record.timer = 0;
+    record.remaining = Math.max(3000, record.remaining - (Date.now() - record.started));
+  }
+  function arm(record) {
+    if (!record.duration || record.closing || record.timer || record.hovered
+        || record.focused || document.hidden) return;
+    record.started = Date.now();
+    record.timer = setTimeout(() => close(record), record.remaining);
+  }
+  function pauseReason(record, reason, active) {
+    record[reason] = active;
+    if (active) pauseTimer(record);
+    else arm(record);
+  }
+  function remove(record, restoreFocus = true) {
+    clearTimeout(record.timer);
+    clearTimeout(record.exitTimer);
+    const containedFocus = record.node.contains(document.activeElement);
+    record.node.remove();
+    record.announcement.remove();
+    const index = records.indexOf(record);
+    if (index !== -1) records.splice(index, 1);
+    if (restoreFocus && containedFocus && record.trigger?.isConnected) record.trigger.focus();
+    scheduleLayout();
+  }
+  function close(record) {
+    if (record.closing) return;
+    record.closing = true;
+    pauseTimer(record);
+    record.node.classList.add('is-leaving');
+    const delay = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 180;
+    record.exitTimer = setTimeout(() => {
+      remove(record);
+      while (waiting.length && records.length < 3) show(waiting.shift());
+    }, delay);
+  }
+  function show(options) {
+    if (!stack) return;
+    const variant = Object.hasOwn(variants, options.variant) ? options.variant : 'info';
+    const message = String(options.message ?? '');
+    const duplicate = records.find(r => !r.closing && r.variant === variant && r.message === message);
+    if (duplicate) {
+      pauseTimer(duplicate);
+      duplicate.trigger = options.trigger;
+      duplicate.remaining = duplicate.duration;
+      arm(duplicate);
+      return;
+    }
+    if (records.length >= 3) {
+      const queued = waiting.find(r => r.variant === variant && r.message === message);
+      if (queued) Object.assign(queued, options);
+      else waiting.push({ ...options, variant, message });
+      return;
+    }
+    const [glyph, word, base] = variants[variant];
+    const node = make('div', 'banner');
+    node.dataset.variant = variant;
+    const icon = make('span', 'banner__icon', glyph);
+    icon.setAttribute('aria-hidden', 'true');
+    const body = make('div', 'banner__body');
+    const line = make('span', 'banner__line');
+    line.append(make('span', 'banner__severity', `${word}: `), make('span', 'banner__text', message));
+    body.append(line);
+    const button = make('button', 'banner__close');
+    button.type = 'button'; button.setAttribute('aria-label', 'Dismiss notification');
+    const cross = make('span', '', '×'); cross.setAttribute('aria-hidden', 'true');
+    button.append(cross); node.append(icon, body, button);
+
+    // Keep the permanent live regions available before announcing. Visual cards
+    // are siblings, so mixed severities still retain chronological stack order.
+    const announcement = make('span', '', `${word}: ${message}`);
+    const region = document.getElementById(variant === 'warning' || variant === 'danger' ? 'banner-alert' : 'banner-status');
+    region.append(announcement);
+    const duration = options.persistent || !base ? 0 : Math.max(base, 3000 + message.length * 60);
+    const record = { node, announcement, variant, message, trigger: options.trigger,
+      duration, remaining: duration, timer: 0, exitTimer: 0, started: 0,
+      hovered: false, focused: false, closing: false };
+    records.push(record); stack.append(node);
+    if (!stack.contains(document.activeElement)) stack.scrollTop = stack.scrollHeight;
+    button.addEventListener('click', () => close(record));
+    node.addEventListener('keydown', event => {
+      if (event.key === 'Escape') { event.preventDefault(); close(record); }
+    });
+    node.addEventListener('pointerenter', () => pauseReason(record, 'hovered', true));
+    node.addEventListener('pointerleave', () => pauseReason(record, 'hovered', false));
+    node.addEventListener('focusin', () => pauseReason(record, 'focused', true));
+    node.addEventListener('focusout', event => {
+      if (!node.contains(event.relatedTarget)) pauseReason(record, 'focused', false);
+    });
+    scheduleLayout(); arm(record);
+  }
+  function clear() {
+    waiting.length = 0;
+    for (const record of [...records]) remove(record, false);
+    scheduleLayout();
+  }
+  if (stack) {
+    new ResizeObserver(scheduleLayout).observe(stack);
+    window.addEventListener('resize', scheduleLayout);
+    document.addEventListener('focusin', scheduleLayout);
+    document.addEventListener('visibilitychange', () => {
+      for (const record of records) document.hidden ? pauseTimer(record) : arm(record);
+    });
+    window.addEventListener('pagehide', clear);
+    window.addEventListener('hashchange', clear);
+  }
+  return { show, clear };
+})();
+
+function notify({ variant = 'success', message, trigger = document.activeElement, persistent = false }) {
+  copyNotifications.show({ variant, message, trigger, persistent });
+}
+
+function dismissAll() {
+  copyNotifications.clear();
+}
+
+/**
+ * Pure, illustrative IPv6 address-plan model. No DOM, storage, network or routing.
+ * The fourth hextet is EE GG RR SS FFFFFFFF. See docs/explorer-model.md.
+ */
+const BASE_PREFIX = '2620:e0:6000::/48';
+
+function freeze(value) {
+  if (value && typeof value === 'object' && !Object.isFrozen(value)) {
+    Object.values(value).forEach(freeze);
+    Object.freeze(value);
+  }
+  return value;
+}
+
+const categories = (rows) => rows.map(([code, name], idx) => ({
+  idx, code, name, bits: idx.toString(2).padStart(2, '0'),
+}));
+
+const ENVIRONMENTS = freeze(categories([
+  ['P', 'Production'], ['D', 'Development'],
+  ['S', 'Staging/UAT'], ['L', 'Lab/Research'],
+]));
+
+const GEOGRAPHIES = freeze(categories([
+  ['NA', 'North America'], ['EU', 'Europe/EMEA'],
+  ['AP', 'Asia Pacific'], ['LA', 'Latin America'],
+]));
+
+const REGIONS = freeze({
+  NA: categories([['NE', 'Northeast'], ['SE', 'Southeast'], ['CE', 'Central'], ['WE', 'West']]),
+  EU: categories([['WE', 'West Europe'], ['CE', 'Cent. Europe'], ['NE', 'North Europe'], ['UK', 'UK & Ireland']]),
+  AP: categories([['EA', 'East Asia'], ['SA', 'SE Asia'], ['SI', 'South Asia'], ['OC', 'Oceania/ANZ']]),
+  LA: categories([['NA', 'N/C America'], ['SA', 'South America'], ['BR', 'Brazil'], ['MC', 'Mex/Central']]),
+});
+
+const SITES = freeze(Array.from({ length: 4 }, (_, idx) => ({
+  idx, code: idx === 0 ? 'RSRV' : `0${idx}`,
+  name: idx === 0 ? 'Reserved site slot' : `Site ${idx}`,
+  bits: idx.toString(2).padStart(2, '0'), reserved: idx === 0,
+})));
+
+const FUNCTION_GROUPS = freeze(Array.from({ length: 16 }, (_, idx) => ({
+  idx,
+  code: `0x${idx.toString(16).toUpperCase()}·`,
+  name: ['Infrastructure', 'Compute/Servers', 'End-User Clients', 'IoT / OT', 'Routing / P2P', 'DMZ / Cloud'][idx] ?? 'Reserved',
+  short: ['INFRA', 'COMPUTE', 'CLIENTS', 'IOT', 'ROUTING', 'DMZ'][idx] ?? '—',
+  reserved: idx >= 6,
+})));
+
+const FUNCTIONS = freeze([
+  [0x00, 'NET-INFRA', 'Network device management SVIs'],
+  [0x01, 'ZT-SECURITY', 'ZT gateways, ZTNA proxies, MFA'],
+  [0x02, 'DNS-INFRA', 'Internal DNS resolvers, DoH/DoT'],
+  [0x03, 'NTP-AAA', 'NTP stratum, RADIUS/TACACS+'],
+  [0x10, 'SERVERS-PROD', 'Production app/db servers'],
+  [0x11, 'SERVERS-MGMT', 'Bastion, IPAM, monitoring'],
+  [0x12, 'SERVERS-BACKUP', 'Backup targets, replication'],
+  [0x13, 'SERVERS-DEV', 'Dev/test servers at site'],
+  [0x20, 'CLIENTS-CORP', 'Managed wired devices, SLAAC'],
+  [0x21, 'CLIENTS-WIFI', 'Corporate 802.1X wireless'],
+  [0x22, 'CLIENTS-GUEST', 'Guest/BYOD, Internet-only'],
+  [0x23, 'CLIENTS-REMOTE', 'ZTNA/VPN remote user pool'],
+  [0x24, 'CLIENTS-KIOSK', 'Kiosks, POS, shared terminals'],
+  [0x30, 'IOT-CORP', 'Printers, scanners, smart devices'],
+  [0x31, 'IOT-BLDG', 'HVAC, cameras, badge readers'],
+  [0x32, 'OT-ICS', 'SCADA/ICS, isolated domain'],
+  [0x33, 'VOICE-UC', 'VoIP, SBC, DSCP CS3/EF'],
+  [0x34, 'VIDEO-CONF', 'Video conferencing, DSCP AF41'],
+  [0x40, 'LOOPBACK', 'Router/switch loopbacks, BGP RID', 128],
+  [0x41, 'P2P-WAN', 'WAN links — MPLS, DIA, SD-WAN', 127],
+  [0x42, 'P2P-FABRIC', 'Fabric — spine-leaf, core-distrib', 127],
+  [0x43, 'P2P-DC', 'DCI — cross-DC, dark-fiber', 127],
+  [0x50, 'DMZ-EXT', 'External VIPs, WAF, CDN origin'],
+  [0x51, 'DMZ-PARTNER', 'B2B/partner, supplier VPN'],
+  [0x52, 'CLOUD-ONRAMP', 'AWS Direct Connect / ExpressRoute'],
+].map(([byte, name, description, exampleLength = null]) => ({
+  byte, name, description, code: `0x${byte.toString(16).toUpperCase().padStart(2, '0')}`,
+  prefixLength: 64, exampleLength,
+})));
+
+const definitions = new Map(FUNCTIONS.map((definition) => [definition.byte, definition]));
+const PREFIX_LENGTHS = [48, 50, 52, 54, 56, 64];
+const LEVELS = ['root', 'environment', 'geography', 'region', 'site', 'function'];
+
+function formatAddress(words) {
+  let start = -1;
+  let length = 1;
+  for (let i = 0; i < words.length;) {
+    if (words[i] !== 0) { i += 1; continue; }
+    let end = i;
+    while (end < words.length && words[end] === 0) end += 1;
+    if (end - i > length) { start = i; length = end - i; }
+    i = end;
+  }
+  const text = words.map((word) => word.toString(16));
+  if (start < 0) return text.join(':');
+  return `${text.slice(0, start).join(':')}::${text.slice(start + length).join(':')}`;
+}
+
+/** Parse and canonicalize an aligned, hexadecimal IPv6 CIDR; reject host bits. */
+function parsePrefix(input) {
+  if (typeof input !== 'string') throw new TypeError('Prefix must be a string.');
+  const match = /^([^\s/]+)\/(0|[1-9]\d{0,2})$/.exec(input.trim());
+  if (!match) throw new RangeError('Use an IPv6 CIDR such as 2620:e0:6000::/48.');
+  const prefixLength = Number(match[2]);
+  if (prefixLength > 128) throw new RangeError('IPv6 prefix length must be 0–128.');
+  const address = match[1];
+  const halves = address.split('::');
+  if (halves.length > 2) throw new RangeError('IPv6 address has more than one ::.');
+  const left = halves[0] ? halves[0].split(':') : [];
+  const right = halves.length === 2 && halves[1] ? halves[1].split(':') : [];
+  if (halves.length === 1 && left.length !== 8) throw new RangeError('IPv6 address needs eight hextets or ::.');
+  const omitted = 8 - left.length - right.length;
+  if (halves.length === 2 && omitted < 1) throw new RangeError(':: must replace at least one zero hextet.');
+  const tokens = halves.length === 2 ? [...left, ...Array(omitted).fill('0'), ...right] : left;
+  if (tokens.length !== 8 || tokens.some((word) => !/^[\da-f]{1,4}$/i.test(word))) {
+    throw new RangeError('IPv6 hextets must contain one to four hexadecimal digits.');
+  }
+  const hextets = tokens.map((word) => parseInt(word, 16));
+  for (let i = 0; i < hextets.length; i += 1) {
+    const kept = Math.max(0, Math.min(16, prefixLength - i * 16));
+    const mask = kept === 0 ? 0 : (0xffff << (16 - kept)) & 0xffff;
+    if ((hextets[i] & mask) !== hextets[i]) throw new RangeError('Prefix has nonzero host bits; use an aligned network.');
+  }
+  const canonicalAddress = formatAddress(hextets);
+  return freeze({ address: canonicalAddress, prefixLength, prefix: `${canonicalAddress}/${prefixLength}`, hextets });
+}
+
+function validPath(path) {
+  if (!Array.isArray(path)) throw new TypeError('Path must be an array of numeric indices.');
+  if (path.length > 5) throw new RangeError('Path has at most five indices.');
+  // Array.from visits holes; sparse paths must not silently become zero bits.
+  Array.from(path).forEach((value, i) => {
+    if (!Number.isInteger(value) || value < 0 || value > (i === 4 ? 255 : 3)) {
+      throw new RangeError(`Invalid ${i === 4 ? 'function byte' : 'two-bit index'} at path position ${i}.`);
+    }
+  });
+  return [...path];
+}
+
+/** Create a model for another aligned /48 without changing any taxonomy. */
+function createModel(basePrefix = BASE_PREFIX) {
+  const base = parsePrefix(basePrefix);
+  if (base.prefixLength !== 48) throw new RangeError('This illustrative hierarchy requires a /48 base.');
+
+  function prefixFor(subnetField, prefixLength) {
+    return `${formatAddress([...base.hextets.slice(0, 3), subnetField, 0, 0, 0, 0])}/${prefixLength}`;
+  }
+
+  function selection(inputPath = []) {
+    const path = validPath(inputPath);
+    const depth = path.length;
+    const [e, g, r, s, fn] = path;
+    const environment = depth >= 1 ? ENVIRONMENTS[e] : null;
+    const geography = depth >= 2 ? GEOGRAPHIES[g] : null;
+    const region = depth >= 3 ? REGIONS[geography.code][r] : null;
+    const site = depth >= 4 ? SITES[s] : null;
+    const definition = depth === 5 ? definitions.get(fn) ?? null : null;
+    const functionGroup = depth === 5 ? FUNCTION_GROUPS[fn >> 4] : null;
+    const siteId = depth >= 4 ? (e << 6) | (g << 4) | (r << 2) | s : null;
+    const subnetField = ((e ?? 0) << 14) | ((g ?? 0) << 12) | ((r ?? 0) << 10) | ((s ?? 0) << 8) | (fn ?? 0);
+    const prefixLength = PREFIX_LENGTHS[depth];
+    const prefix = prefixFor(subnetField, prefixLength);
+    const siteCode = site ? `${environment.code}-${geography.code}-${region.code}-${site.code}` : null;
+    const code = [null, environment?.code, geography?.code, region?.code, siteCode, definition?.code ?? `0x${(fn ?? 0).toString(16).toUpperCase().padStart(2, '0')}`][depth];
+    const name = [
+      'Illustrative IPv6 address plan', environment?.name, geography?.name, region?.name,
+      site?.name, definition?.name ?? 'Reserved function slot',
+    ][depth];
+    const bits = {
+      environment: environment?.bits ?? '??', geography: geography?.bits ?? '??',
+      region: region?.bits ?? '??', site: site?.bits ?? '??',
+      function: depth === 5 ? fn.toString(2).padStart(8, '0') : '????????',
+    };
+    bits.siteId = `${bits.environment}${bits.geography}${bits.region}${bits.site}`;
+    bits.subnet = `${bits.siteId}${bits.function}`;
+    return freeze({
+      path, depth, level: LEVELS[depth], prefixLength, prefix,
+      label: depth === 4 ? `${siteCode} · ${name}` : name,
+      name, code,
+      description: definition?.description ?? [
+        'Synthetic address-plan taxonomy; no allocation or routing observation is implied.',
+        'Four illustrative geography groups.', 'Four illustrative regions.',
+        'Four /56 site slots; site slot zero is reserved.',
+        site?.reserved ? 'Reserved /56 site slot; its encoded site ID includes the environment, geography and region bits.' : '256 /64 function containers.',
+        'Reserved /64 function container.',
+      ][depth],
+      reserved: Boolean(site?.reserved || (depth === 5 && !definition)),
+      environment, geography, region, site, function: definition, functionGroup,
+      functionByte: depth === 5 ? fn : null,
+      siteId, siteIdHex: siteId === null ? null : `0x${siteId.toString(16).toUpperCase().padStart(2, '0')}`,
+      subnetField, subnetHex: subnetField.toString(16).toUpperCase().padStart(4, '0'), bits,
+      examplePrefix: definition?.exampleLength ? prefixFor(subnetField, definition.exampleLength) : null,
+      exampleLength: definition?.exampleLength ?? null,
+      groupPrefix: functionGroup ? prefixFor(subnetField & 0xfff0, 60) : null,
+    });
+  }
+
+  function children(path = []) {
+    const parent = selection(path);
+    if (parent.depth === 5) return freeze([]);
+    return freeze(Array.from({ length: parent.depth === 4 ? 256 : 4 }, (_, idx) => selection([...parent.path, idx])));
+  }
+
+  function shortcuts(path = [0, 0, 0, 1]) {
+    const checked = validPath(path);
+    if (checked.length < 4) throw new RangeError('Shortcuts require a complete site path.');
+    return freeze(FUNCTIONS.map(({ byte }) => selection([...checked.slice(0, 4), byte])));
+  }
+
+  return freeze({ basePrefix: base.prefix, selection, children, shortcuts });
+}
+
+const defaultModel = createModel();
+const selection = defaultModel.selection;
+const children = defaultModel.children;
+const shortcuts = defaultModel.shortcuts;
+
+
+const enhancementStyles = document.createElement("style");
+enhancementStyles.dataset.enhancementStyles = "";
+enhancementStyles.textContent = "/* JS-only explorer controls; activated before the enhanced UI is revealed. */\n.breadcrumbs { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: var(--space-2); }\n.breadcrumbs:empty { display: none; }\n.crumb { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: var(--space-2); color: var(--text-muted); background: var(--surface); border: 1px solid transparent; border-radius: var(--radius-sm); font-size: var(--step--1); }\nbutton.crumb { text-decoration: underline; text-underline-offset: 4px; }\nbutton.crumb:hover { color: var(--brand); background: var(--surface-2); }\n.crumb code { color: var(--brand); }\n.crumb[aria-current] { background: var(--accent-secondary); color: var(--on-accent-secondary); }\n.crumb-separator { color: var(--text-muted); }\n.scope-row { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); padding-block: var(--space-2); border-bottom: 1px solid var(--border); align-items: center; }\n.scope-title { flex: 1 1 18rem; min-width: 0; }\n.scope-title h3 { font: 600 var(--step-1)/1.2 var(--font-mono); letter-spacing: -.04em; overflow-wrap: anywhere; }\n.scope-title p { margin-top: 0; }\n.explorer-layout { display: grid; gap: var(--space-3); margin-top: var(--space-3); }\n.browser-panel { min-width: 0; }\n.browser-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-1); }\n.browser-heading h3, .decoder-heading h3 { font-size: 1rem; font-weight: 600; }\n.address-blocks { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--space-2); margin-top: var(--space-2); }\n.address-block { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; text-align: left; gap: var(--space-3); min-width: 0; min-height: 64px; border: 1px solid var(--text-muted); border-radius: var(--radius-sm); padding: var(--space-2); background: var(--surface); color: var(--text); transition: background 150ms ease-out,border-color 150ms ease-out; }\n.address-block:hover { background: var(--surface-2); border-color: var(--brand); }\n.block-code { display: inline-grid; place-items: center; min-width: 36px; min-height: 36px; padding-inline: var(--space-1); border-radius: var(--radius-sm); color: var(--text-muted); background: var(--surface-2); font: 550 var(--step--1)/1 var(--font-mono); }\n.block-text { display: grid; gap: var(--space-1); min-width: 0; }\n.block-name { font-size: 1rem; font-weight: 600; }\n.block-text code { color: var(--text-muted); font-size: var(--step--1); overflow-wrap: anywhere; }\n.block-arrow { color: var(--text-muted); }\n.decoder-panel { min-width: 0; align-self: start; border-top: 1px solid var(--border); padding-top: var(--space-4); }\n.decoder-heading { display: flex; justify-content: space-between; gap: var(--space-2); align-items: center; }\n.bit-fields { display: grid; grid-template-columns: repeat(4,minmax(2ch,1fr)) minmax(calc(8ch + var(--space-2)),2fr); gap: var(--space-1); margin-block: var(--space-3); font: var(--step--1)/1.4 var(--font-mono); }\n.bit-field { background: var(--surface-2); border-radius: var(--radius-sm); padding: var(--space-1); text-align: center; display: grid; gap: var(--space-1); min-width: 0; }\n.bit-field span { color: var(--text-muted); font-size: var(--step--1); }\n.bit-field code { position: relative; min-height: 1.4em; font: inherit; white-space: nowrap; }\n.bit-field.is-empty code::after { content: \"\"; position: absolute; inset-inline: 20%; bottom: .2em; height: 1px; background: var(--border); }\n.decoder-panel h4 { font-size: 1rem; font-weight: 600; margin: 0; }\n.decoder-prefix { display: block; width: 100%; color: var(--accent); font-size: var(--step--1); margin-block: var(--space-1) var(--space-2); overflow-wrap: anywhere; }\n.selection-meta { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin-top: var(--space-3); }\n.selection-meta > div { display: flex; gap: var(--space-2); }\n.selection-meta dd { font: var(--step--1)/1.6 var(--font-mono); }\n.button { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); min-height: 44px; border: 1px solid var(--text-muted); border-radius: var(--radius-sm); padding: var(--space-2) var(--space-4); font-size: 1rem; font-weight: 550; }\n.secondary { background: var(--surface); color: var(--text); }\n.secondary:hover { background: var(--surface-2); color: var(--brand); }\n.example-assignment { display: grid; gap: var(--space-1); padding: var(--space-3); margin-top: var(--space-3); border-radius: var(--radius-sm); background: var(--surface-2); }\n.example-assignment .prefix-action { justify-self: start; font-size: 1rem; }\n.manual-copy { max-width: 32rem; }\n.manual-prefix { width: 100%; min-height: 44px; padding: var(--space-2); background: var(--danger-soft); color: var(--text); border: 1px solid var(--danger); border-radius: var(--radius-sm); font-family: var(--font-mono); margin-top: var(--space-2); }\n#manual-copy label { display: block; margin-top: var(--space-3); font-size: var(--step--1); }\n.function-view { display: block; }\n.group-picker { display: grid; gap: var(--space-2); margin-bottom: var(--space-2); }\n.group-picker label { font-size: var(--step--1); color: var(--text-muted); }\n.group-picker select { min-height: 44px; width: 100%; min-width: 0; padding: var(--space-2); background: var(--surface); color: var(--text); font: 1rem/1.4 var(--font-sans); border: 1px solid var(--text-muted); border-radius: var(--radius-sm); }\n.function-matrix { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: var(--space-2); }\n.function-cell { min-width: 44px; min-height: 44px; padding: var(--space-2); border: 1px solid var(--text-muted); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); font: 550 1rem/1 var(--font-mono); }\n.function-cell[data-reserved=\"true\"] { color: var(--text-muted); background: var(--surface-2); border-style: dashed; }\n.function-cell:hover { border-color: var(--brand); color: var(--brand); }\n.function-cell[aria-pressed=\"true\"] { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }\n.function-key { margin-top: var(--space-2); }\n.function-matrix.named-functions { grid-template-columns: repeat(auto-fit,minmax(44px,1fr)); }\n.reserved-functions { margin-top: var(--space-2); }\n.reserved-functions summary { color: var(--text-muted); }\n.reserved-functions .function-matrix { margin-top: var(--space-2); }\nsummary { min-height: 44px; padding-block: var(--space-3); cursor: pointer; font-size: var(--step--1); font-weight: 550; }\ndetails p { max-width: 68ch; }\ndetails p + p { margin-top: var(--space-3); }\n.tool-disclosures { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,18rem),1fr)); column-gap: var(--space-6); row-gap: var(--space-2); border-top: 1px solid var(--border); padding-top: 0; margin-top: var(--space-2); }\n.tool-disclosures details[open] { grid-column: 1 / -1; }\n.shortcuts, .model-details { min-width: 0; }\n.shortcuts[open], .model-details[open] { padding-bottom: var(--space-2); }\n.shortcut-list { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }\n.shortcut-list button { min-height: 44px; padding: var(--space-2) var(--space-3); font: var(--step--1)/1.4 var(--font-mono); border: 1px solid var(--text-muted); border-radius: var(--radius-sm); background: var(--surface); color: var(--text); }\n.shortcut-list button:hover { background: var(--surface-2); color: var(--brand); }\n\n@media (min-width: 48rem) {  .scope-title { display: flex; align-items: baseline; flex-wrap: wrap; gap: var(--space-2); } .group-picker { grid-template-columns: auto minmax(0,1fr); align-items: center; } .address-blocks { grid-template-columns: repeat(2,minmax(0,1fr)); } .address-blocks.function-view { display: block; } .explorer-layout { grid-template-columns: minmax(0,1fr) 15rem; gap: var(--space-4); } .decoder-panel { border-top: 0; border-left: 1px solid var(--border); padding-top: 0; padding-left: var(--space-4); } }\n@media (min-width: 64rem) { .address-blocks { grid-template-columns: repeat(2,minmax(0,1fr)); } .address-blocks.function-view { display: block; } .function-matrix { grid-template-columns: repeat(8,minmax(0,1fr)); } }\n/* Generous desktop spacing, selected against the available viewport height. */\n@media (min-width: 48rem) {\n  \n  .explorer-layout { grid-template-columns: minmax(0,1fr) 17rem; gap: var(--space-6); }\n  .decoder-panel { padding-left: var(--space-6); }\n  .section-heading { column-gap: var(--space-6); }\n  .scope-title { column-gap: var(--space-4); }\n  :root[data-spacing=\"balanced\"] .scope-row { padding-block: var(--space-3); }\n  :root[data-spacing=\"balanced\"] .explorer-layout { margin-top: var(--space-4); }\n  :root[data-spacing=\"balanced\"] .tool-disclosures { margin-top: var(--space-4); }\n\n  \n  :root[data-spacing=\"comfortable\"] .scope-row { padding-block: var(--space-4); }\n  :root[data-spacing=\"comfortable\"] .explorer-layout { margin-top: var(--space-6); gap: var(--space-8); }\n  :root[data-spacing=\"comfortable\"] .decoder-panel { padding-left: var(--space-8); }\n  :root[data-spacing=\"comfortable\"] .address-block { min-height: 80px; padding: var(--space-3); }\n  :root[data-spacing=\"comfortable\"] .address-blocks { gap: var(--space-3); margin-top: var(--space-3); }\n  :root[data-spacing=\"comfortable\"] .browser-heading { margin-bottom: var(--space-2); }\n  :root[data-spacing=\"comfortable\"] .group-picker { margin-bottom: var(--space-3); }\n  :root[data-spacing=\"comfortable\"] .reserved-functions { margin-top: var(--space-3); }\n  :root[data-spacing=\"comfortable\"] .bit-fields { margin-block: var(--space-4); }\n  :root[data-spacing=\"comfortable\"] .selection-meta { margin-top: var(--space-4); }\n  :root[data-spacing=\"comfortable\"] .tool-disclosures { margin-top: var(--space-6); padding-top: var(--space-1); }\n}\n\n.crumb[aria-current] code { color: inherit; }\n@media (prefers-contrast: more) {\n  .reserved-functions summary, .block-code, .block-text code, .block-arrow,\n  .bit-field span, .group-picker label, .crumb, .crumb-separator,\n  .function-cell[data-reserved=\"true\"]:not([aria-pressed=\"true\"]) { color: var(--text); }\n  .address-block, .function-cell, .button, .group-picker select { border-width: 2px; }\n}\n@media (forced-colors: active) {\n  .address-block, .button, .function-cell, .bit-field, .group-picker select,\n  .manual-prefix { border: 1px solid ButtonText; }\n  .function-cell[aria-pressed=\"true\"] { border-style: double; border-width: 3px; }\n  .crumb[aria-current] { border: 1px solid CanvasText; }\n}\n\n/* Outcome banners: shared palette only; Design Standard 2.9.2 \u00a76.7. */\n:root { --z-banner: 1000; }\nhtml { padding-block-end: var(--banner-scroll-room, 0px); }\n.banner-stack {\n  --banner-inset-start: calc(var(--space-4) + env(safe-area-inset-left, 0px));\n  --banner-inset-end: calc(var(--space-4) + env(safe-area-inset-right, 0px));\n  position: fixed;\n  inset-inline-end: var(--banner-inset-end);\n  bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));\n  inline-size: max-content;\n  max-inline-size: min(28rem, calc(100% - var(--banner-inset-start) - var(--banner-inset-end)));\n  max-block-size: 55vh;\n  max-block-size: 55dvh;\n  padding: var(--space-2);\n  overflow: auto;\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n  gap: var(--space-2);\n  z-index: var(--z-banner);\n  pointer-events: none;\n}\n.banner-stack:dir(rtl) {\n  --banner-inset-start: calc(var(--space-4) + env(safe-area-inset-right, 0px));\n  --banner-inset-end: calc(var(--space-4) + env(safe-area-inset-left, 0px));\n}\n.banner-region {\n  position: absolute;\n  width: 1px;\n  height: 1px;\n  padding: 0;\n  overflow: hidden;\n  clip-path: inset(50%);\n  white-space: nowrap;\n}\n.banner {\n  flex: none;\n  pointer-events: auto;\n  display: grid;\n  grid-template-columns: auto minmax(0, 1fr) auto;\n  align-items: center;\n  gap: var(--space-2);\n  min-width: 0;\n  padding: var(--space-3) var(--space-2) var(--space-3) var(--space-4);\n  background: var(--surface);\n  color: var(--text);\n  border: 1px solid var(--border);\n  border-inline-start: 4px solid var(--status, var(--brand));\n  border-radius: var(--radius-md);\n  box-shadow: var(--shadow);\n  font-size: var(--step-0);\n  animation: banner-in 150ms ease-out;\n}\n.banner[data-variant=\"info\"] { --status: var(--brand); }\n.banner[data-variant=\"success\"] { --status: var(--success); }\n.banner[data-variant=\"warning\"] { --status: var(--warning); }\n.banner[data-variant=\"danger\"] { --status: var(--danger); }\n.banner__icon { color: var(--status); }\n.banner__body { min-width: 0; overflow-wrap: anywhere; }\n.banner__severity { font-weight: 600; }\n.banner__close {\n  min-width: 44px;\n  min-height: 44px;\n  padding: 0;\n  border: 0;\n  border-radius: var(--radius-sm);\n  background: transparent;\n  color: var(--text);\n  font-size: 1.25rem;\n  cursor: pointer;\n}\n.banner__close:hover { background: var(--surface-2); }\n.banner.is-leaving {\n  opacity: 0;\n  transform: translateY(8px);\n  transition: opacity 150ms ease-out, transform 150ms ease-out;\n}\n@keyframes banner-in { from { opacity: 0; transform: translateY(8px); } }\n@media (prefers-reduced-motion: reduce) {\n  .banner { animation: none; }\n  .banner.is-leaving { transform: none; transition: none; }\n}\n@media (forced-colors: active) {\n  .banner { border-color: CanvasText; }\n  .banner__icon { color: CanvasText; }\n}\n";
+document.head.append(enhancementStyles);
+
+
+const $ = (id) => document.getElementById(id);
+let current = selection(), copyRevision = 0, groupIndex = 0;
+const levelLabels = ['Environments · /50', 'Geographies · /52', 'Regions · /54', 'Sites · /56', 'Function containers · /64', 'Function containers · /64'];
+const pathLabels = ['Plan', 'Environment', 'Geography', 'Region', 'Site', 'Function'];
+function element(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+function preview(item = current, state = 'Selected') {
+  $('decoder-state').textContent = state;
+  $('selection-title').textContent = item.depth === 0 ? 'Address plan' : item.name;
+  $('decoder-prefix').textContent = item.prefix;
+  $('decoder-prefix').setAttribute('aria-label', `Copy prefix ${item.prefix}`);
+  $('selection-description').textContent = item.depth === 5 ? item.description : '';
+  const fields = $('bit-fields');
+  fields.replaceChildren();
+  for (const [key, label] of [['environment','E'], ['geography','G'], ['region','R'], ['site','S'], ['function','F']]) {
+    const field = element('div', `bit-field${key === 'function' ? ' function-bits' : ''}`);
+    const unset = item.bits[key].includes('?');
+    field.classList.toggle('is-empty', unset);
+    field.setAttribute('role', 'group'); field.setAttribute('aria-label', `${key}: ${unset ? 'not selected' : item.bits[key]}`); field.title = key;
+    field.append(element('span', '', label), element('code', '', unset ? '' : item.bits[key]));
+    fields.append(field);
+  }
+  const meta = $('selection-meta');
+  meta.replaceChildren();
+  const rows = [['Prefix', `/${item.prefixLength}`]];
+  if (item.siteIdHex !== null) rows.push(['Site ID', item.siteIdHex]);
+  if (item.depth === 5) rows.push(['Function', `0x${item.functionByte.toString(16).toUpperCase().padStart(2, '0')}`]);
+  if (item.reserved) rows.push(['Designation', 'Reserved']);
+  for (const [label, value] of rows) {
+    const row = element('div');
+    row.append(element('dt', '', label), element('dd', '', value));
+    meta.append(row);
+  }
+}
+function attachPreview(button, item) {
+  button.addEventListener('pointerenter', () => preview(item, 'Preview'));
+  button.addEventListener('focus', () => preview(item, 'Preview'));
+  button.addEventListener('pointerleave', () => preview());
+  button.addEventListener('blur', () => preview());
+}
+function block(item) {
+  const button = element('button', 'address-block');
+  button.type = 'button'; button.title = `${item.label} · ${item.prefix}`; button.dataset.prefix = item.prefix;
+  const text = element('span', 'block-text');
+  text.append(element('span', 'block-name', item.name), element('code', '', item.prefix));
+  const badge = element('span', 'block-code', item.depth === 4 ? item.siteIdHex : item.code);
+  badge.setAttribute('aria-hidden', 'true');
+  button.append(badge, text, element('span', 'block-arrow', '›'));
+  button.lastChild.setAttribute('aria-hidden', 'true');
+  if (item.depth === 4) button.setAttribute('aria-label', `${item.name}, ${item.prefix}, encoded site ID ${item.siteIdHex}`);
+  attachPreview(button, item);
+  button.addEventListener('click', () => render(item.path, true));
+  return button;
+}
+function showChildren() {
+  const panel = $('address-blocks'); panel.replaceChildren();
+  panel.classList.toggle('function-view', current.depth >= 4);
+  if (current.depth < 4) {
+    $('level-count').textContent = '4 blocks';
+    panel.append(...children(current.path).map(block)); return;
+  }
+  $('level-count').textContent = '256 total';
+  const sitePath = current.path.slice(0, 4);
+  const items = children(sitePath).filter((item) => item.functionGroup.idx === groupIndex);
+  const groupPicker = element('div', 'group-picker');
+  const label = element('label', '', 'Function group'); label.htmlFor = 'function-group';
+  const select = element('select'); select.id = 'function-group';
+  const namedGroups = element('optgroup'); namedGroups.label = 'Named functions';
+  const reservedGroups = element('optgroup'); reservedGroups.label = 'Reserved groups';
+  for (const group of FUNCTION_GROUPS) {
+    const range = `${(group.idx * 16).toString(16).padStart(2, '0')}–${(group.idx * 16 + 15).toString(16).padStart(2, '0')}`;
+    const option = element('option', '', `${group.name} · 0x${range}`);
+    option.value = String(group.idx); option.selected = group.idx === groupIndex;
+    (group.idx < 6 ? namedGroups : reservedGroups).append(option);
+  }
+  select.append(namedGroups, reservedGroups);
+  select.addEventListener('change', () => {
+    // Browsing another group must not replace the persistent /64 selection.
+    groupIndex = Number(select.value); showChildren(); preview(); $('function-group').focus();
+  });
+  groupPicker.append(label, select);
+  const matrix = element('div', 'function-matrix named-functions');
+  matrix.setAttribute('role', 'group'); matrix.setAttribute('aria-label', `${FUNCTION_GROUPS[groupIndex].name} function containers`);
+  const reserved = element('details', 'reserved-functions');
+  reserved.open = current.depth === 5 && current.function === null;
+  const reservedItems = items.filter((item) => item.function === null);
+  const range = `${reservedItems[0].functionByte.toString(16).toUpperCase().padStart(2, '0')}–${reservedItems.at(-1).functionByte.toString(16).toUpperCase().padStart(2, '0')}`;
+  reserved.append(element('summary', '', `${reservedItems.length} reserved slots · ${range}`));
+  const reservedMatrix = element('div', 'function-matrix');
+  reservedMatrix.setAttribute('role', 'group'); reservedMatrix.setAttribute('aria-label', 'Reserved function containers');
+  for (const item of items) {
+    const byte = item.functionByte.toString(16).toUpperCase().padStart(2, '0');
+    const button = element('button', 'function-cell', byte);
+    button.type = 'button'; button.dataset.prefix = item.prefix; button.dataset.reserved = String(item.function === null);
+    button.title = `${item.name} · ${item.prefix}`;
+    button.setAttribute('aria-label', `${byte} ${item.name}, ${item.prefix}`);
+    button.setAttribute('aria-pressed', String(current.depth === 5 && current.functionByte === item.functionByte));
+    attachPreview(button, item); button.addEventListener('click', () => render(item.path, true));
+    (item.function === null ? reservedMatrix : matrix).append(button);
+  }
+  reserved.append(reservedMatrix);
+  panel.append(groupPicker);
+  if (matrix.childElementCount) panel.append(matrix);
+  panel.append(reserved);
+}
+function showBreadcrumbs() {
+  const nav = $('breadcrumbs'); nav.replaceChildren();
+  for (let depth = 0; depth <= current.depth; depth++) {
+    const ancestor = selection(current.path.slice(0, depth));
+    if (depth) { const separator = element('span', 'crumb-separator', '›'); separator.setAttribute('aria-hidden', 'true'); nav.append(separator); }
+    const isCurrent = depth === current.depth;
+    const crumb = element(isCurrent ? 'span' : 'button', 'crumb');
+    const compactName = depth === 0 ? 'Plan' : depth === 4 ? ancestor.site.code : depth === 5 ? ancestor.function?.code || 'Reserved' : ancestor.code;
+    crumb.append(element('code', '', `/${ancestor.prefixLength}`), element('span', '', compactName));
+    crumb.title = `${ancestor.name} · ${ancestor.prefix}`; crumb.dataset.prefix = ancestor.prefix;
+    crumb.setAttribute('aria-label', `${pathLabels[depth]}: ${ancestor.name}, ${ancestor.prefix}`);
+    if (isCurrent) crumb.setAttribute('aria-current', 'location');
+    else {
+      crumb.type = 'button'; crumb.setAttribute('aria-label', `${pathLabels[depth]}: ${ancestor.name}, ${ancestor.prefix}`);
+      crumb.addEventListener('click', () => render(ancestor.path, true));
+    }
+    nav.append(crumb);
+  }
+}
+function showSelection() {
+  $('scope-prefix').textContent = current.prefix;
+  $('scope-prefix').setAttribute('aria-label', `Copy ${current.depth === 5 ? 'container' : 'prefix'} ${current.prefix}`);
+  $('scope-name').textContent = `${current.name}${current.reserved ? ' · Reserved' : ''}`;
+  $('scope-name').hidden = current.depth === 0;
+  $('address-space').dataset.depth = String(current.depth);
+  $('back-prefix').hidden = current.depth === 0;
+  if (current.depth) $('back-prefix').setAttribute('aria-label', `Back to /${selection(current.path.slice(0, -1)).prefixLength}`);
+  $('example-assignment').hidden = !current.examplePrefix;
+  if (current.examplePrefix) {
+    $('example-assignment').querySelector('.field-label').textContent = current.exampleLength === 128 ? 'Example host /128 · within this /64' : 'Example link /127 · within this /64';
+    $('example-prefix').textContent = current.examplePrefix;
+    $('example-prefix').setAttribute('aria-label', `Copy example ${current.examplePrefix}`);
+  }
+}
+function showShortcuts() {
+  const container = $('shortcut-list'); container.replaceChildren();
+  const site = current.depth >= 4 ? current.path.slice(0, 4) : [0, 0, 0, 1];
+  for (const item of shortcuts(site)) {
+    const button = element('button', '', item.function.name);
+    button.type = 'button'; button.title = item.prefix; button.dataset.prefix = item.prefix;
+    button.setAttribute('aria-label', `Open ${item.function.name}, ${item.prefix}`);
+    attachPreview(button, item); button.addEventListener('click', () => render(item.path, true)); container.append(button);
+  }
+}
+function render(path, moveFocus = false) {
+  const next = selection(path);
+  if (next.path.slice(0, 4).join() !== current.path.slice(0, 4).join()) groupIndex = 0;
+  if (next.depth === 5) groupIndex = next.functionByte >> 4;
+  current = next; copyRevision++;
+  dismissAll(); $('manual-copy').hidden = true;
+  $('level-heading').textContent = levelLabels[current.depth]; $('level-heading').tabIndex = -1;
+  $('level-help').textContent = current.depth >= 4 ? 'Choose a group, then select a /64 container.' : 'Select a block to explore. Hover or focus to preview its bits.';
+  showBreadcrumbs(); showChildren(); showSelection(); showShortcuts(); preview();
+  if (moveFocus) $('scope-prefix').focus();
+}
+async function copyPrefix(value, trigger) {
+  const revision = ++copyRevision;
+  $('manual-copy').hidden = true;
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+    await navigator.clipboard.writeText(value);
+    if (revision !== copyRevision) return;
+    notify({ variant: 'success', message: 'Copied.', trigger });
+  } catch (_) {
+    if (revision !== copyRevision) return;
+    notify({ variant: 'danger', message: `Copy failed. Select and copy manually: ${value}`, trigger, persistent: true });
+    $('manual-copy').hidden = false; $('manual-prefix').value = value; $('manual-prefix').focus(); $('manual-prefix').select();
+  }
+}
+$('back-prefix').addEventListener('click', () => render(current.path.slice(0, -1), true));
+$('scope-prefix').addEventListener('click', (event) => copyPrefix(current.prefix, event.currentTarget));
+$('example-prefix').addEventListener('click', (event) => copyPrefix(current.examplePrefix, event.currentTarget));
+$('decoder-prefix').addEventListener('click', (event) => copyPrefix(event.currentTarget.textContent, event.currentTarget));
+document.querySelectorAll('[data-copy-prefix]').forEach((node) => {
+  const button = element('button', 'prefix-action', node.textContent);
+  button.type = 'button'; button.title = 'Copy prefix';
+  button.dataset.copyPrefix = node.dataset.copyPrefix;
+  if (node.hasAttribute('data-base-prefix')) button.setAttribute('data-base-prefix', '');
+  button.setAttribute('aria-label', `Copy prefix ${node.dataset.copyPrefix}`);
+  button.addEventListener('click', () => copyPrefix(button.dataset.copyPrefix, button));
+  node.replaceWith(button);
+});
+document.querySelectorAll('[data-base-prefix]').forEach((node) => {
+  node.textContent = BASE_PREFIX; node.dataset.copyPrefix = BASE_PREFIX;
+  node.setAttribute('aria-label', `Copy prefix ${BASE_PREFIX}`);
+});
+document.querySelectorAll('[data-fallback-prefix]').forEach((node) => { node.textContent = selection([0, 0, 0, 1, 0]).prefix; });
+render([]); $('explorer-fallback').hidden = true; $('explorer-app').hidden = false;
+
+})();
+(() => {
+  const root = document.documentElement;
+  let scheduled = false;
+
+  function fitSpacing() {
+    scheduled = false;
+    if (!matchMedia('(min-width: 48rem)').matches) {
+      root.removeAttribute('data-spacing');
+      return;
+    }
+    // Use the most generous spacing that fits the actual content and viewport.
+    // If even compact content is taller, let the page scroll naturally.
+    for (const spacing of ['comfortable', 'balanced', 'compact']) {
+      root.dataset.spacing = spacing;
+      if (Math.ceil(document.body.getBoundingClientRect().height) <= innerHeight) break;
+    }
+  }
+
+  function schedule() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(fitSpacing);
+  }
+
+  new MutationObserver(schedule).observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['open', 'hidden'],
+  });
+  addEventListener('resize', schedule, { passive: true });
+  schedule();
+})();
+
+</script>
+</body>
+</html>
